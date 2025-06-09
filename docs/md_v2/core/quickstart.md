@@ -41,6 +41,7 @@ if __name__ == "__main__":
 ```
 
 **What’s happening?**
+
 - **`AsyncWebCrawler`** launches a headless browser (Chromium by default).
 - It fetches `https://example.com`.
 - Crawl4AI automatically converts the HTML into Markdown.
@@ -188,6 +189,7 @@ if __name__ == "__main__":
 ```
 
 **Why is this helpful?**
+
 - Great for repetitive page structures (e.g., item listings, articles).
 - No AI usage or costs.
 - The crawler returns a JSON string you can parse or store.
@@ -266,6 +268,7 @@ if __name__ == "__main__":
 ```
 
 **What’s happening?**
+
 - We define a Pydantic schema (`PricingInfo`) describing the fields we want.
 - The LLM extraction strategy uses that schema and your instructions to transform raw text into structured JSON.
 - Depending on the **provider** and **api_token**, you can use local models or a remote API.
@@ -314,6 +317,7 @@ if __name__ == "__main__":
 ```
 
 The example above shows two ways to handle multiple URLs:
+
 1. **Streaming mode** (`stream=True`): Process results as they become available using `async for`
 2. **Batch mode** (`stream=False`): Wait for all results to complete
 

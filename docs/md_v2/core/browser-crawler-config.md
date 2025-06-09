@@ -34,12 +34,12 @@ class BrowserConfig:
         ...
 ```
 
-### Key Fields to Note
+### Key Fields to Note BrowserConfig
 
 1. **`browser_type`**  
-- Options: `"chromium"`, `"firefox"`, or `"webkit"`.  
-- Defaults to `"chromium"`.  
-- If you need a different engine, specify it here.
+    - Options: `"chromium"`, `"firefox"`, or `"webkit"`.  
+    - Defaults to `"chromium"`.  
+    - If you need a different engine, specify it here.
 
 2. **`headless`**  
    - `True`: Runs the browser in headless mode (invisible browser).  
@@ -47,14 +47,16 @@ class BrowserConfig:
 
 3. **`proxy_config`**  
    - A dictionary with fields like:  
-```json
-{
-    "server": "http://proxy.example.com:8080", 
-    "username": "...", 
-    "password": "..."
-}
-```
-   - Leave as `None` if a proxy is not required.
+
+    ```json
+    {
+        "server": "http://proxy.example.com:8080", 
+        "username": "...", 
+        "password": "..."
+    }
+    ```
+
+    - Leave as `None` if a proxy is not required.
 
 4. **`viewport_width` & `viewport_height`**:  
    - The initial window size.  
@@ -84,7 +86,7 @@ class BrowserConfig:
     - Additional flags for the underlying browser.  
     - E.g. `["--disable-extensions"]`.
 
-### Helper Methods
+### Helper Methods BrowserConfig
 
 Both configuration classes provide a `clone()` method to create modified copies:
 
@@ -153,7 +155,7 @@ class CrawlerRunConfig:
         ...
 ```
 
-### Key Fields to Note
+### Key Fields to Note CrawlerRunConfig
 
 1. **`word_count_threshold`**:  
    - The minimum word count before a block is considered.  
@@ -194,8 +196,8 @@ class CrawlerRunConfig:
    - Overlaps with the browser's verbosity if also set to `True` in `BrowserConfig`.
 
 10. **`enable_rate_limiting`**:  
-   - If `True`, enables rate limiting for batch processing.  
-   - Requires `rate_limit_config` to be set.
+    - If `True`, enables rate limiting for batch processing.  
+    - Requires `rate_limit_config` to be set.
 
 11. **`memory_threshold_percent`**:  
     - The memory threshold (as a percentage) to monitor.  
@@ -213,8 +215,7 @@ class CrawlerRunConfig:
     - The display mode for progress information (`DETAILED`, `BRIEF`, etc.).  
     - Affects how much information is printed during the crawl.
 
-
-### Helper Methods
+### Helper Methods CrawlerRunConfig
 
 The `clone()` method is particularly useful for creating variations of your crawler configuration:
 
@@ -239,6 +240,7 @@ debug_config = base_config.clone(
 ```
 
 The `clone()` method:
+
 - Creates a new instance with all the same settings
 - Updates only the specified parameters
 - Leaves the original configuration unchanged
@@ -246,19 +248,19 @@ The `clone()` method:
 
 ---
 
-
 ## 3. LLMConfig Essentials
 
-### Key fields to note
+### Key fields to note LLMConfig
 
 1. **`provider`**:  
-- Which LLM provoder to use. 
-- Possible values are `"ollama/llama3","groq/llama3-70b-8192","groq/llama3-8b-8192", "openai/gpt-4o-mini" ,"openai/gpt-4o","openai/o1-mini","openai/o1-preview","openai/o3-mini","openai/o3-mini-high","anthropic/claude-3-haiku-20240307","anthropic/claude-3-opus-20240229","anthropic/claude-3-sonnet-20240229","anthropic/claude-3-5-sonnet-20240620","gemini/gemini-pro","gemini/gemini-1.5-pro","gemini/gemini-2.0-flash","gemini/gemini-2.0-flash-exp","gemini/gemini-2.0-flash-lite-preview-02-05","deepseek/deepseek-chat"`<br/>*(default: `"openai/gpt-4o-mini"`)*
+
+    - Which LLM provoder to use.
+    - Possible values are `"ollama/llama3","groq/llama3-70b-8192","groq/llama3-8b-8192", "openai/gpt-4o-mini" ,"openai/gpt-4o","openai/o1-mini","openai/o1-preview","openai/o3-mini","openai/o3-mini-high","anthropic/claude-3-haiku-20240307","anthropic/claude-3-opus-20240229","anthropic/claude-3-sonnet-20240229","anthropic/claude-3-5-sonnet-20240620","gemini/gemini-pro","gemini/gemini-1.5-pro","gemini/gemini-2.0-flash","gemini/gemini-2.0-flash-exp","gemini/gemini-2.0-flash-lite-preview-02-05","deepseek/deepseek-chat"`<br/>*(default: `"openai/gpt-4o-mini"`)*
 
 2. **`api_token`**:  
     - Optional. When not provided explicitly, api_token will be read from environment variables based on provider. For example: If a gemini model is passed as provider then,`"GEMINI_API_KEY"` will be read from environment variables  
     - API token of LLM provider <br/> eg: `api_token = "gsk_1ClHGGJ7Lpn4WGybR7vNWGdyb3FY7zXEw3SCiy0BAVM9lL8CQv"`
-    - Environment variable - use with prefix "env:" <br/> eg:`api_token = "env: GROQ_API_KEY"`            
+    - Environment variable - use with prefix "env:" <br/> eg:`api_token = "env: GROQ_API_KEY"`
 
 3. **`base_url`**:  
    - If your provider has a custom endpoint

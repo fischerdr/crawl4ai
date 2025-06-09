@@ -106,6 +106,7 @@ python -m docs.examples.hello_world
 For examples that require additional dependencies or environment variables, refer to the comments at the top of each file.
 
 Some examples may require:
+
 - API keys (for LLM-based examples)
 - Docker setup (for Docker-related examples)
 - Additional dependencies (specified in the example files)

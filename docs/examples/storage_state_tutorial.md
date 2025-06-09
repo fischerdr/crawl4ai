@@ -1,8 +1,10 @@
-### Using `storage_state` to Pre-Load Cookies and LocalStorage
+# Storage State Tutorial
+
+## Using `storage_state` to Pre-Load Cookies and LocalStorage
+
+### What is `storage_state`?
 
 Crawl4ai’s `AsyncWebCrawler` lets you preserve and reuse session data, including cookies and localStorage, across multiple runs. By providing a `storage_state`, you can start your crawls already “logged in” or with any other necessary session data—no need to repeat the login flow every time.
-
-#### What is `storage_state`?
 
 `storage_state` can be:
 

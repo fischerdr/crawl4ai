@@ -14,7 +14,6 @@ In **`CrawlerRunConfig`**, you can specify a **`content_filter`** to shape how c
 - **`result.markdown.fit_markdown`** (filtered or “fit” version)
 - **`result.markdown.fit_html`** (the corresponding HTML snippet that produced `fit_markdown`)
 
-
 ### 1.2 Common Filters
 
 1. **PruningContentFilter** – Scores each node by text density, link density, and tag importance, discarding those below a threshold.  
@@ -143,7 +142,7 @@ if __name__ == "__main__":
 
 ## 4. Accessing the “Fit” Output
 
-After the crawl, your “fit” content is found in **`result.markdown.fit_markdown`**. 
+After the crawl, your “fit” content is found in **`result.markdown.fit_markdown`**.
 
 ```python
 fit_md = result.markdown.fit_markdown
@@ -235,6 +234,7 @@ class MyCustomFilter(RelevantContentFilter):
 - **AI Pipelines**: Filter out boilerplate so LLM-based extraction or summarization runs on denser text.
 
 **Key Points**:
+
 - **PruningContentFilter**: Great if you just want the “meatiest” text without a user query.  
 - **BM25ContentFilter**: Perfect for query-based extraction or searching.  
 - Combine with **`excluded_tags`, `exclude_external_links`, `word_count_threshold`** to refine your final “fit” text.  

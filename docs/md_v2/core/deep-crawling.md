@@ -11,6 +11,7 @@ In this tutorial, you'll learn:
 5. Using **BestFirstCrawling** for intelligent exploration prioritization  
 
 > **Prerequisites**  
+>
 > - You’ve completed or read [AsyncWebCrawler Basics](../core/simple-crawling.md) to understand how to run a simple crawl.  
 > - You know how to configure `CrawlerRunConfig`.
 
@@ -52,6 +53,7 @@ if __name__ == "__main__":
 ```
 
 **What's happening?**  
+
 - `BFSDeepCrawlStrategy(max_depth=2, include_external=False)` instructs Crawl4AI to:
   - Crawl the starting page (depth 0) plus 2 more levels
   - Stay within the same domain (don't follow external links)
@@ -79,6 +81,7 @@ strategy = BFSDeepCrawlStrategy(
 ```
 
 **Key parameters:**
+
 - **`max_depth`**: Number of levels to crawl beyond the starting page
 - **`include_external`**: Whether to follow links to other domains
 - **`max_pages`**: Maximum number of pages to crawl (default: infinite)
@@ -103,6 +106,7 @@ strategy = DFSDeepCrawlStrategy(
 ```
 
 **Key parameters:**
+
 - **`max_depth`**: Number of levels to crawl beyond the starting page
 - **`include_external`**: Whether to follow links to other domains
 - **`max_pages`**: Maximum number of pages to crawl (default: infinite)
@@ -134,6 +138,7 @@ strategy = BestFirstCrawlingStrategy(
 ```
 
 This crawling approach:
+
 - Evaluates each discovered URL based on scorer criteria
 - Visits higher-scoring pages first
 - Helps focus crawl resources on the most relevant content
@@ -163,6 +168,7 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 **When to use non-streaming mode:**
+
 - You need the complete dataset before processing
 - You're performing batch operations on all results together
 - Crawl time isn't a critical factor
@@ -183,6 +189,7 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 **Benefits of streaming mode:**
+
 - Process results immediately as they're discovered
 - Start working with early results while crawling continues
 - Better for real-time applications or progressive display
@@ -287,6 +294,7 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 **How scorers work:**
+
 - Evaluate each discovered URL before crawling
 - Calculate relevance based on various signals
 - Help the crawler make intelligent choices about traversal order
@@ -338,6 +346,7 @@ config = CrawlerRunConfig(
 ```
 
 This filter:
+
 - Measures semantic similarity between query and page content
 - It's a BM25-based relevance filter using head section content
 
@@ -424,7 +433,6 @@ if __name__ == "__main__":
 
 ---
 
-
 ## 8. Limiting and Controlling Crawl Size
 
 ### 8.1 Using max_pages
@@ -440,6 +448,7 @@ strategy = BFSDeepCrawlStrategy(
 ```
 
 This feature is useful for:
+
 - Controlling API costs
 - Setting predictable execution times
 - Focusing on the most important content

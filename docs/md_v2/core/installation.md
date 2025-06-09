@@ -11,6 +11,7 @@ This installs the **core** Crawl4AI library along with essential dependencies.â€
 ## 2. Initial Setup & Diagnostics
 
 ### 2.1 Run the Setup Command
+
 After installing, call:
 
 ```bash
@@ -18,11 +19,13 @@ crawl4ai-setup
 ```
 
 **What does it do?**
+
 - Installs or updates required Playwright browsers (Chromium, Firefox, etc.)
 - Performs OS-level checks (e.g., missing libs on Linux)
 - Confirms your environment is ready to crawl
 
 ### 2.2 Diagnostics
+
 Optionally, you can run **diagnostics** to confirm everything is functioning:
 
 ```bash
@@ -30,6 +33,7 @@ crawl4ai-doctor
 ```
 
 This command attempts to:
+
 - Check Python version compatibility
 - Verify Playwright installation
 - Inspect environment variables or library conflicts
@@ -58,6 +62,7 @@ if __name__ == "__main__":
 ```
 
 **Expected** outcome:
+
 - A headless browser session loads `example.com`
 - Crawl4AI returns ~300 characters of markdown.  
 If errors occur, rerun `crawl4ai-doctor` or manually ensure Playwright is installed correctly.
@@ -71,29 +76,36 @@ If errors occur, rerun `crawl4ai-doctor` or manually ensure Playwright is instal
 ### 4.1 Torch, Transformers, or All
 
 - **Text Clustering (Torch)**  
+
   ```bash
   pip install crawl4ai[torch]
   crawl4ai-setup
   ```
+
   Installs PyTorch-based features (e.g., cosine similarity or advanced semantic chunking).
 
 - **Transformers**  
+
   ```bash
   pip install crawl4ai[transformer]
   crawl4ai-setup
   ```
+
   Adds Hugging Face-based summarization or generation strategies.
 
 - **All Features**  
+
   ```bash
   pip install crawl4ai[all]
   crawl4ai-setup
   ```
 
 #### (Optional) Pre-Fetching Models
+
 ```bash
 crawl4ai-download-models
 ```
+
 This step caches large models locally (if needed).â€€**Only do this** if your workflow requires them.
 
 ---

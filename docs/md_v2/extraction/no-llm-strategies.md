@@ -189,9 +189,11 @@ Real sites often have **nested** or repeated data—like categories containing p
 ### Sample E-Commerce HTML
 
 We have a **sample e-commerce** HTML file on GitHub (example):
-```
+
+```html
 https://gist.githubusercontent.com/githubusercontent/2d7b8ba3cd8ab6cf3c8da771ddb36878/raw/1ae2f90c6861ce7dd84cc50d3df9920dee5e1fd2/sample_ecommerce.html
 ```
+
 This snippet includes categories, products, features, reviews, and related items. Let's see how to define a schema that fully captures that structure **without LLM**.
 
 ```python
@@ -412,6 +414,7 @@ strategy = RegexExtractionStrategy(pattern=RegexExtractionStrategy.All)
 ```
 
 Available patterns include:
+
 - `Email` - Email addresses
 - `PhoneIntl` - International phone numbers
 - `PhoneUS` - US-format phone numbers
@@ -538,8 +541,9 @@ asyncio.run(extract_with_generated_pattern())
 ```
 
 This pattern allows you to:
+
 1. Use an LLM once to generate a highly optimized regex for your specific site
-2. Save the pattern to disk for reuse 
+2. Save the pattern to disk for reuse
 3. Extract data using only regex (no further LLM calls) in production
 
 ### Extraction Results Format
@@ -564,6 +568,7 @@ The `RegexExtractionStrategy` returns results in a consistent format:
 ```
 
 Each match includes:
+
 - `url`: The source URL
 - `label`: The pattern name that matched (e.g., "email", "phone_us")
 - `value`: The extracted text
@@ -712,7 +717,7 @@ strategy = JsonCssExtractionStrategy(css_schema)
 3. **Consider Both CSS and XPath**: Try both schema types and choose the one that works best for your specific case.
 4. **Cache Generated Schemas**: Since generation uses LLM, save successful schemas for reuse.
 5. **API Token Security**: Never hardcode API tokens. Use environment variables or secure configuration management.
-6. **Choose Provider Wisely**: 
+6. **Choose Provider Wisely**:
    - Use OpenAI for production-quality schemas
    - Use Ollama for development, testing, or when you need a self-hosted solution
 

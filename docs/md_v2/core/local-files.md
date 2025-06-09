@@ -79,7 +79,7 @@ asyncio.run(crawl_raw_html())
 
 ---
 
-# Complete Example
+## Complete Example
 
 Below is a comprehensive script that:
 
@@ -156,6 +156,6 @@ if __name__ == "__main__":
 
 ---
 
-# Conclusion
+## Conclusion
 
 With the unified `url` parameter and prefix-based handling in **Crawl4AI**, you can seamlessly handle web URLs, local HTML files, and raw HTML content. Use `CrawlerRunConfig` for flexible and consistent configuration in all scenarios.

@@ -102,6 +102,7 @@ config = CrawlerRunConfig(
   - `exclude_external_images`: Discards images not hosted on the same domain as the main page (or its subdomains).
 
 By default in case you set `exclude_social_media_links=True`, the following social media domains are excluded:
+
 ```python
 [
     'facebook.com',
@@ -115,7 +116,6 @@ By default in case you set `exclude_social_media_links=True`, the following soci
     'reddit.com',
 ]
 ```
-
 
 ### 2.2 Example Usage
 
@@ -150,6 +150,7 @@ if __name__ == "__main__":
 ## 3. Handling Iframes
 
 Some sites embed content in `<iframe>` tags. If you want that inline:
+
 ```python
 config = CrawlerRunConfig(
     # Merge iframe content into the final output
@@ -159,6 +160,7 @@ config = CrawlerRunConfig(
 ```
 
 **Usage**:
+
 ```python
 import asyncio
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig
@@ -342,6 +344,7 @@ if __name__ == "__main__":
 ```
 
 **Why This Works**:
+
 - **CSS** scoping with `#main-content`.  
 - Multiple **exclude_** parameters to remove domains, external images, etc.  
 - A **JsonCssExtractionStrategy** to parse repeated article blocks.
@@ -424,11 +427,13 @@ The LXML strategy can be up to 10-20x faster than BeautifulSoup strategy, partic
 3. If you encounter any inconsistencies between LXML and BeautifulSoup results, please [raise an issue](https://github.com/codeium/crawl4ai/issues) with a reproducible example
 
 Choose LXML strategy when:
+
 - Processing large HTML documents (recommended for >100KB)
 - Performance is critical
 - Working with well-formed HTML
 
 Stick to BeautifulSoup strategy (default) when:
+
 - Maximum compatibility is needed
 - Working with malformed HTML
 - Exact parsing behavior is critical
@@ -474,6 +479,7 @@ if __name__ == "__main__":
 ```
 
 This approach gives you the best of both worlds:
+
 - Markdown generation and content extraction focus on the elements you care about
 - Links, images and other page data still give you the full context of the page
 - Content filtering still applies globally

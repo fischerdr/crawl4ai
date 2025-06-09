@@ -28,46 +28,58 @@ Below is a **partial update** to your **Managed Browsers** tutorial, specificall
 If you installed Crawl4AI (which installs Playwright under the hood), you already have a Playwright-managed Chromium on your system. Follow these steps to launch that **Chromium** from your command line, specifying a **custom** data directory:
 
 1. **Find** the Playwright Chromium binary:
-   - On most systems, installed browsers go under a `~/.cache/ms-playwright/` folder or similar path.  
-   - To see an overview of installed browsers, run:
+
+- On most systems, installed browsers go under a `~/.cache/ms-playwright/` folder or similar path.  
+- To see an overview of installed browsers, run:
+
      ```bash
      python -m playwright install --dry-run
      ```
+
      or
+
      ```bash
      playwright install --dry-run
      ```
+
      (depending on your environment). This shows where Playwright keeps Chromium.
 
-   - For instance, you might see a path like:
-     ```
+- For instance, you might see a path like:
+
+     ```text
      ~/.cache/ms-playwright/chromium-1234/chrome-linux/chrome
      ```
+
      on Linux, or a corresponding folder on macOS/Windows.
 
 2. **Launch** the Playwright Chromium binary with a **custom** user-data directory:
+
    ```bash
    # Linux example
    ~/.cache/ms-playwright/chromium-1234/chrome-linux/chrome \
        --user-data-dir=/home/<you>/my_chrome_profile
    ```
+
    ```bash
    # macOS example (Playwright’s internal binary)
    ~/Library/Caches/ms-playwright/chromium-1234/chrome-mac/Chromium.app/Contents/MacOS/Chromium \
        --user-data-dir=/Users/<you>/my_chrome_profile
    ```
+
    ```powershell
    # Windows example (PowerShell/cmd)
    "C:\Users\<you>\AppData\Local\ms-playwright\chromium-1234\chrome-win\chrome.exe" ^
        --user-data-dir="C:\Users\<you>\my_chrome_profile"
    ```
-   
+
    **Replace** the path with the actual subfolder indicated in your `ms-playwright` cache structure.  
-   - This **opens** a fresh Chromium with your new or existing data folder.  
-   - **Log into** any sites or configure your browser the way you want.  
-   - **Close** when done—your profile data is saved in that folder.
+
+- This **opens** a fresh Chromium with your new or existing data folder.  
+- **Log into** any sites or configure your browser the way you want.  
+- **Close** when done—your profile data is saved in that folder.
 
 3. **Use** that folder in **`BrowserConfig.user_data_dir`**:
+
    ```python
    from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig
 
@@ -78,7 +90,8 @@ If you installed Crawl4AI (which installs Playwright under the hood), you alread
        browser_type="chromium"
    )
    ```
-   - Next time you run your code, it reuses that folder—**preserving** your session data, cookies, local storage, etc.
+
+- Next time you run your code, it reuses that folder—**preserving** your session data, cookies, local storage, etc.
 
 ---
 
@@ -209,6 +222,7 @@ asyncio.run(manage_profiles())
 ```
 
 **How profile creation works:**
+
 1. A browser window opens for you to interact with
 2. You log in to websites, set preferences, etc.
 3. When you're done, press 'q' in the terminal to close the browser
@@ -292,6 +306,7 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 **How it works:**
+
 - `locale` affects language preferences, date formats, number formats, etc.
 - `timezone_id` affects JavaScript's Date object and time-related functionality
 - These settings are applied when creating the browser context and maintained throughout the session
@@ -321,6 +336,7 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 **Important notes:**
+
 - When `geolocation` is specified, the browser is automatically granted permission to access location
 - Websites using the Geolocation API will receive the exact coordinates you specify
 - This affects map services, store locators, delivery services, etc.
@@ -361,7 +377,7 @@ Combining persistent profiles with precise geolocation and region settings gives
 ## 8. Summary
 
 - **Create** your user-data directory either:
-  - By launching Chrome/Chromium externally with `--user-data-dir=/some/path` 
+  - By launching Chrome/Chromium externally with `--user-data-dir=/some/path`
   - Or by using the built-in `BrowserProfiler.create_profile()` method
   - Or through the interactive interface with `profiler.interactive_manager()`
 - **Log in** or configure sites as needed, then close the browser

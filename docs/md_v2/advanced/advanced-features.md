@@ -1,4 +1,5 @@
-# Overview of Some Important Advanced Features 
+# Overview of Some Important Advanced Features
+
 (Proxy, PDF, Screenshot, SSL, Headers, & Storage State)
 
 Crawl4AI offers multiple power-user features that go beyond simple crawling. This tutorial covers:
@@ -11,6 +12,7 @@ Crawl4AI offers multiple power-user features that go beyond simple crawling. Thi
 6. **Robots.txt Compliance**  
 
 > **Prerequisites**  
+>
 > - You have a basic grasp of [AsyncWebCrawler Basics](../core/simple-crawling.md)  
 > - You know how to run or configure your Python environment with Playwright installed
 
@@ -53,6 +55,7 @@ if __name__ == "__main__":
 ```
 
 **Key Points**  
+
 - **`proxy_config`** expects a dict with `server` and optional auth credentials.  
 - Many commercial proxies provide an HTTP/HTTPS “gateway” server that you specify in `server`.  
 - If your proxy doesn’t need auth, omit `username`/`password`.
@@ -97,10 +100,12 @@ if __name__ == "__main__":
 ```
 
 **Why PDF + Screenshot?**  
+
 - Large or complex pages can be slow or error-prone with “traditional” full-page screenshots.  
 - Exporting a PDF is more reliable for very long pages. Crawl4AI automatically converts the first PDF page into an image if you request both.  
 
 **Relevant Parameters**  
+
 - **`pdf=True`**: Exports the current page as a PDF (base64-encoded in `result.pdf`).  
 - **`screenshot=True`**: Creates a screenshot (base64-encoded in `result.screenshot`).  
 - **`scan_full_page`** or advanced hooking can further refine how the crawler captures content.
@@ -148,6 +153,7 @@ if __name__ == "__main__":
 ```
 
 **Key Points**  
+
 - **`fetch_ssl_certificate=True`** triggers certificate retrieval.  
 - `result.ssl_certificate` includes methods (`to_json`, `to_pem`, `to_der`) for saving in various formats (handy for server config, Java keystores, etc.).
 
@@ -187,6 +193,7 @@ if __name__ == "__main__":
 ```
 
 **Notes**  
+
 - Some sites may react differently to certain headers (e.g., `Accept-Language`).  
 - If you need advanced user-agent randomization or client hints, see [Identity-Based Crawling (Anti-Bot)](./identity-based-crawling.md) or use `UserAgentGenerator`.
 
@@ -279,7 +286,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-**Key Points**
+## Key Points
+
 - Robots.txt files are cached locally for efficiency
 - Cache is stored in `~/.crawl4ai/robots/robots_cache.db`
 - Cache has a default TTL of 7 days

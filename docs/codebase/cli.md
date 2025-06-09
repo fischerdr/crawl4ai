@@ -1,4 +1,6 @@
-### `cli.py` command surface
+# CLI
+
+## `cli.py` command surface
 
 | Command | Inputs / flags | What it does |
 |---|---|---|
@@ -22,7 +24,7 @@
 > `config` = tweak global defaults,  
 > everything else is sugar.
 
-### Quick-fire “profile” usage cheatsheet
+## Quick-fire “profile” usage cheatsheet
 
 | Scenario | Command (copy-paste ready) | Notes |
 |---|---|---|
@@ -37,4 +39,3 @@
 | **Use profile from inside Profile Manager** | `crwl profiles` → choose **4** → pick profile → enter URL → follow prompts | Handy when demo-ing to non-CLI folks. |
 | **One-off crawl with a profile folder path (no name lookup)** | `crwl https://site.com -b "user_data_dir=$HOME/.crawl4ai/profiles/my-profile,use_managed_browser=true"` | Bypasses registry, useful for CI scripts. |
 | **Launch a dev browser on CDP port with the same identity** | `crwl cdp -d $HOME/.crawl4ai/profiles/my-profile -P 9223` | Lets Puppeteer/Playwright attach for debugging. |
-

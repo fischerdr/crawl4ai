@@ -25,26 +25,26 @@ async def arun_many(
 ## Differences from `arun()`
 
 1. **Multiple URLs**:  
-   
-   - Instead of crawling a single URL, you pass a list of them (strings or tasks).  
-   - The function returns either a **list** of `CrawlResult` or an **async generator** if streaming is enabled.
+
+- Instead of crawling a single URL, you pass a list of them (strings or tasks).  
+- The function returns either a **list** of `CrawlResult` or an **async generator** if streaming is enabled.
 
 2. **Concurrency & Dispatchers**:  
 
-   - **`dispatcher`** param allows advanced concurrency control.  
-   - If omitted, a default dispatcher (like `MemoryAdaptiveDispatcher`) is used internally.  
-   - Dispatchers handle concurrency, rate limiting, and memory-based adaptive throttling (see [Multi-URL Crawling](../advanced/multi-url-crawling.md)).
+- **`dispatcher`** param allows advanced concurrency control.  
+- If omitted, a default dispatcher (like `MemoryAdaptiveDispatcher`) is used internally.  
+- Dispatchers handle concurrency, rate limiting, and memory-based adaptive throttling (see [Multi-URL Crawling](../advanced/multi-url-crawling.md)).
 
 3. **Streaming Support**:  
 
-   - Enable streaming by setting `stream=True` in your `CrawlerRunConfig`.
-   - When streaming, use `async for` to process results as they become available.
-   - Ideal for processing large numbers of URLs without waiting for all to complete.
+- Enable streaming by setting `stream=True` in your `CrawlerRunConfig`.
+- When streaming, use `async for` to process results as they become available.
+- Ideal for processing large numbers of URLs without waiting for all to complete.
 
 4. **Parallel** Execution**:  
 
-   - `arun_many()` can run multiple requests concurrently under the hood.  
-   - Each `CrawlResult` might also include a **`dispatch_result`** with concurrency details (like memory usage, start/end times).
+- `arun_many()` can run multiple requests concurrently under the hood.  
+- Each `CrawlResult` might also include a **`dispatch_result`** with concurrency details (like memory usage, start/end times).
 
 ### Basic Example (Batch Mode)
 
@@ -96,6 +96,7 @@ results = await crawler.arun_many(
 ```
 
 **Key Points**:
+
 - Each URL is processed by the same or separate sessions, depending on the dispatcher’s strategy.
 - `dispatch_result` in each `CrawlResult` (if using concurrency) can hold memory and timing info.  
 - If you need to handle authentication or session IDs, pass them in each individual task or within your run config.

@@ -1,4 +1,6 @@
-### browser_manager.py
+# Browser Manager
+
+## browser_manager.py
 
 | Function | What it does |
 |---|---|
@@ -27,7 +29,7 @@
 
 ---
 
-### browser_profiler.py
+## browser_profiler.py
 
 | Function | What it does |
 |---|---|

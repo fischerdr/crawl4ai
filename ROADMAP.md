@@ -56,9 +56,11 @@ Crawl4AI is evolving to provide more intelligent, efficient, and versatile web c
 This section introduces three powerful crawling systems that extend Crawl4AI's capabilities from basic web crawling to intelligent, purpose-driven data extraction.
 
 ### 1.1 Question-Based Crawler
+
 The Question-Based Crawler enhances our core engine by enabling automatic discovery and extraction of relevant web content based on natural language questions.
 
 Key Features:
+
 - SerpiAPI integration for intelligent web search
 - Relevancy scoring for search results
 - Automatic URL discovery and prioritization
@@ -82,9 +84,11 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 ### 1.2 Knowledge-Optimal Crawler
+
 An intelligent crawling system that solves the optimization problem of minimizing data extraction while maximizing knowledge acquisition for specific objectives.
 
 Key Features:
+
 - Smart content prioritization
 - Minimal data extraction for maximum knowledge
 - Probabilistic relevance assessment
@@ -122,9 +126,11 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 ### 1.3 Agentic Crawler
+
 An autonomous system capable of understanding complex goals and automatically planning and executing multi-step crawling operations.
 
 Key Features:
+
 - Autonomous goal interpretation
 - Dynamic step planning
 - Interactive navigation capabilities
@@ -163,14 +169,16 @@ async with AsyncWebCrawler() as crawler:
     print("Success Rate:", result.success_rate)
 ```
 
-# Section 2: Specialized Features 🛠️
+## Section 2: Specialized Features 🛠️
 
 This section introduces specialized tools and features that enhance Crawl4AI's capabilities for specific use cases and data extraction needs.
 
 ### 2.1 Automated Schema Generator
+
 A system that automatically generates JsonCssExtractionStrategy schemas from natural language descriptions, making structured data extraction accessible to all users.
 
 Key Features:
+
 - Natural language schema generation
 - Automatic pattern detection
 - Predefined schema templates
@@ -222,9 +230,11 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 ### 2.2 Domain Specific Scrapers
+
 Specialized extraction strategies optimized for common website types and platforms, providing consistent and reliable data extraction without additional configuration.
 
 Key Features:
+
 - Pre-configured extractors for popular platforms
 - Academic site specialization (arXiv, NCBI)
 - E-commerce standardization
@@ -262,9 +272,11 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 ### 2.3 Web Embedding Index
+
 Creates and maintains a semantic search infrastructure for crawled content, enabling efficient retrieval and querying of web content through vector embeddings.
 
 Key Features:
+
 - Automatic embedding generation
 - Intelligent content chunking
 - Efficient vector storage and indexing
@@ -308,7 +320,7 @@ async with AsyncWebCrawler() as crawler:
 
 Each of these specialized features builds upon Crawl4AI's core functionality while providing targeted solutions for specific use cases. They can be used independently or combined for more complex data extraction and processing needs.
 
-# Section 3: Development Tools 🔧
+## Section 3: Development Tools 🔧
 
 This section covers tools designed to enhance the development experience, monitoring, and deployment of Crawl4AI applications.
 
@@ -319,12 +331,14 @@ The Crawl4AI Playground is an interactive web-based development environment that
 #### Key Features 🌟
 
 ##### Visual Strategy Builder
+
 - Interactive point-and-click interface for building extraction strategies
 - Real-time preview of selected elements
 - Side-by-side comparison of different extraction approaches
 - Visual validation of CSS selectors and XPath queries
 
 ##### AI Assistant Integration
+
 - Strategy recommendations based on target website analysis
 - Parameter optimization suggestions
 - Best practices guidance for specific use cases
@@ -332,6 +346,7 @@ The Crawl4AI Playground is an interactive web-based development environment that
 - Performance optimization tips
 
 ##### Real-Time Testing & Validation
+
 - Live preview of extraction results
 - Side-by-side comparison of multiple strategies
 - Performance metrics visualization
@@ -339,6 +354,7 @@ The Crawl4AI Playground is an interactive web-based development environment that
 - Error detection and debugging tools
 
 ##### Project Management
+
 - Save and organize multiple scraping projects
 - Version control for configurations
 - Export/import project settings
@@ -346,17 +362,19 @@ The Crawl4AI Playground is an interactive web-based development environment that
 - Project templates for common use cases
 
 ##### Deployment Pipeline
+
 - One-click deployment to various environments
 - Docker container generation
 - Cloud deployment templates (AWS, GCP, Azure)
 - Scaling configuration management
 - Monitoring setup automation
 
-
 ### 3.2 Performance Monitoring System
+
 A comprehensive monitoring solution providing real-time insights into crawler operations, resource usage, and system health through both CLI and GUI interfaces.
 
 Key Features:
+
 - Real-time resource tracking
 - Active crawl monitoring
 - Performance statistics
@@ -401,9 +419,11 @@ Metrics (Last 5min):
 ```
 
 ### 3.3 Cloud Integration
+
 Streamlined deployment tools for setting up Crawl4AI in various cloud environments, with support for scaling and monitoring.
 
 Key Features:
+
 - One-click deployment solutions
 - Auto-scaling configuration
 - Load balancing setup
@@ -441,14 +461,16 @@ print(f"Monitor URL: {deployment.monitor_url}")
 
 These development tools work together to provide a comprehensive environment for developing, testing, monitoring, and deploying Crawl4AI applications. The Playground helps users experiment and generate optimal configurations, the Performance Monitor ensures smooth operation, and the Cloud Integration tools simplify deployment and scaling.
 
-# Section 4: Community & Growth 🌱
+## Section 4: Community & Growth 🌱
 
 This section outlines initiatives designed to build and support the Crawl4AI community, provide educational resources, and ensure sustainable project growth.
 
 ### 4.1 Sponsorship Program
+
 A structured program to support ongoing development and maintenance of Crawl4AI while providing valuable benefits to sponsors.
 
 Key Features:
+
 - Multiple sponsorship tiers
 - Sponsor recognition system
 - Priority support for sponsors
@@ -456,7 +478,8 @@ Key Features:
 - Custom feature development opportunities
 
 Program Structure (not yet finalized):
-```
+
+```text
 Sponsorship Tiers:
 
 🥉 Bronze Supporter
@@ -484,9 +507,11 @@ Sponsorship Tiers:
 ```
 
 ### 4.2 "How to Crawl" Video Series
+
 A comprehensive educational resource teaching users how to effectively use Crawl4AI for various web scraping and data extraction scenarios.
 
 Key Features:
+
 - Step-by-step tutorials
 - Real-world use cases
 - Best practices
@@ -494,6 +519,7 @@ Key Features:
 - Advanced feature deep-dives
 
 These community initiatives are designed to:
+
 - Provide comprehensive learning resources
 - Foster a supportive user community
 - Ensure sustainable project development

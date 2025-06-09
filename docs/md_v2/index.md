@@ -46,8 +46,7 @@
 
 Crawl4AI is the #1 trending GitHub repository, actively maintained by a vibrant community. It delivers blazing-fast, AI-ready web crawling tailored for large language models, AI agents, and data pipelines. Fully open source, flexible, and built for real-time performance, **Crawl4AI** empowers developers with unmatched speed, precision, and deployment ease.
 
-> **Note**: If you're looking for the old documentation, you can access it [here](https://old.docs.crawl4ai.com).
-
+> **Note**: If you're looking for the old documentation, you can access it [Old Docs](https://old.docs.crawl4ai.com).
 
 ## Quick Start
 
@@ -91,6 +90,7 @@ Crawl4AI is a feature-rich crawler and scraper that aims to:
 5. **Open Source**: No forced API keys, no paywalls—everyone can access their data.  
 
 **Core Philosophies**:
+
 - **Democratize Data**: Free to use, transparent, and highly configurable.  
 - **LLM Friendly**: Minimally processed, well-structured text, images, and metadata, so AI models can easily consume it.
 

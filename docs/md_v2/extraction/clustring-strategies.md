@@ -5,6 +5,7 @@ The Cosine Strategy in Crawl4AI uses similarity-based clustering to identify and
 ## How It Works
 
 The Cosine Strategy:
+
 1. Breaks down page content into meaningful chunks
 2. Converts text into vector representations
 3. Calculates similarity between chunks
@@ -57,14 +58,17 @@ CosineStrategy(
 ### Parameter Details
 
 1. **semantic_filter**
-   - Sets the target topic or content type
-   - Use keywords relevant to your desired content
-   - Example: "technical specifications", "user reviews", "pricing information"
+
+- Sets the target topic or content type
+- Use keywords relevant to your desired content
+- Example: "technical specifications", "user reviews", "pricing information"
 
 2. **sim_threshold**
-   - Controls how similar content must be to be grouped together
-   - Higher values (e.g., 0.8) mean stricter matching
-   - Lower values (e.g., 0.3) allow more variation
+
+- Controls how similar content must be to be grouped together
+- Higher values (e.g., 0.8) mean stricter matching
+- Lower values (e.g., 0.3) allow more variation
+
    ```python
    # Strict matching
    strategy = CosineStrategy(sim_threshold=0.8)
@@ -74,16 +78,20 @@ CosineStrategy(
    ```
 
 3. **word_count_threshold**
-   - Filters out short content blocks
-   - Helps eliminate noise and irrelevant content
+
+- Filters out short content blocks
+- Helps eliminate noise and irrelevant content
+
    ```python
    # Only consider substantial paragraphs
    strategy = CosineStrategy(word_count_threshold=50)
    ```
 
 4. **top_k**
-   - Number of top content clusters to return
-   - Higher values return more diverse content
+
+- Number of top content clusters to return
+- Higher values return more diverse content
+
    ```python
    # Get top 5 most relevant content clusters
    strategy = CosineStrategy(top_k=5)
@@ -92,6 +100,7 @@ CosineStrategy(
 ## Use Cases
 
 ### 1. Article Content Extraction
+
 ```python
 strategy = CosineStrategy(
     semantic_filter="main article content",
@@ -106,6 +115,7 @@ result = await crawler.arun(
 ```
 
 ### 2. Product Review Analysis
+
 ```python
 strategy = CosineStrategy(
     semantic_filter="customer reviews and ratings",
@@ -116,6 +126,7 @@ strategy = CosineStrategy(
 ```
 
 ### 3. Technical Documentation
+
 ```python
 strategy = CosineStrategy(
     semantic_filter="technical specifications documentation",
@@ -128,6 +139,7 @@ strategy = CosineStrategy(
 ## Advanced Features
 
 ### Custom Clustering
+
 ```python
 strategy = CosineStrategy(
     linkage_method='complete',  # Alternative clustering method
@@ -137,6 +149,7 @@ strategy = CosineStrategy(
 ```
 
 ### Content Filtering Pipeline
+
 ```python
 strategy = CosineStrategy(
     semantic_filter="pricing plans features",
@@ -164,16 +177,19 @@ async def extract_pricing_features(url: str):
 ## Best Practices
 
 1. **Adjust Thresholds Iteratively**
-   - Start with default values
-   - Adjust based on results
-   - Monitor clustering quality
+
+- Start with default values
+- Adjust based on results
+- Monitor clustering quality
 
 2. **Choose Appropriate Word Count Thresholds**
-   - Higher for articles (100+)
-   - Lower for reviews/comments (20+)
-   - Medium for product descriptions (50+)
+
+- Higher for articles (100+)
+- Lower for reviews/comments (20+)
+- Medium for product descriptions (50+)
 
 3. **Optimize Performance**
+
    ```python
    strategy = CosineStrategy(
        word_count_threshold=10,  # Filter early
@@ -183,6 +199,7 @@ async def extract_pricing_features(url: str):
    ```
 
 4. **Handle Different Content Types**
+
    ```python
    # For mixed content pages
    strategy = CosineStrategy(
@@ -214,6 +231,7 @@ except Exception as e:
 ```
 
 The Cosine Strategy is particularly effective when:
+
 - Content structure is inconsistent
 - You need semantic understanding
 - You want to find similar content blocks

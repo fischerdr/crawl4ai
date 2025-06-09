@@ -5,6 +5,7 @@ This documentation covers the API reference for extraction and chunking strategi
 ## Extraction Strategies
 
 All extraction strategies inherit from the base `ExtractionStrategy` class and implement two key methods:
+
 - `extract(url: str, html: str) -> List[Dict[str, Any]]`
 - `run(url: str, sections: List[str]) -> List[Dict[str, Any]]`
 
@@ -315,7 +316,8 @@ result = await crawler.arun(
    - Use `CosineStrategy` for content similarity and clustering
 
 2. **Strategy Selection Guide**
-   ```
+
+   ```text
    Is the target data a common type (email/phone/date/URL)? 
    → RegexExtractionStrategy
    
@@ -330,6 +332,7 @@ result = await crawler.arun(
    ```
 
 3. **Optimize Chunking**
+
    ```python
    # For long documents
    strategy = LLMExtractionStrategy(
@@ -339,6 +342,7 @@ result = await crawler.arun(
    ```
 
 4. **Combine Strategies for Best Performance**
+
    ```python
    # First pass: Extract structure with CSS
    css_strategy = JsonCssExtractionStrategy(product_schema)
@@ -358,6 +362,7 @@ result = await crawler.arun(
    ```
 
 5. **Handle Errors**
+
    ```python
    try:
        result = await crawler.arun(
@@ -371,6 +376,7 @@ result = await crawler.arun(
    ```
 
 6. **Monitor Performance**
+
    ```python
    strategy = CosineStrategy(
        verbose=True,  # Enable logging
@@ -380,6 +386,7 @@ result = await crawler.arun(
    ```
 
 7. **Cache Generated Patterns**
+
    ```python
    # For RegexExtractionStrategy pattern generation
    import json

@@ -2,7 +2,7 @@
 
 A three‑stage demo that goes from **LinkedIn scraping** ➜ **LLM reasoning** ➜ **graph visualisation**.
 
-```
+```text
 prospect‑wizard/
 ├─ c4ai_discover.py         # Stage 1 – scrape companies + people
 ├─ c4ai_insights.py         # Stage 2 – embeddings, org‑charts, scores
@@ -15,14 +15,17 @@ prospect‑wizard/
 ## 1  Install & boot a LinkedIn profile (one‑time)
 
 ### 1.1  Install dependencies
+
 ```bash
 pip install crawl4ai litellm sentence-transformers pandas rich
 ```
 
 ### 1.2  Create / warm a LinkedIn browser profile
+
 ```bash
 crwl profiles
 ```
+
 1. The interactive shell shows **New profile** – hit **enter**.
 2. Choose a name, e.g. `profile_linkedin_uc`.
 3. A Chromium window opens – log in to LinkedIn, solve whatever CAPTCHA, then close.
@@ -45,13 +48,16 @@ python c4ai_discover.py full \
   --concurrency 2 \
   --log-level debug
 ```
+
 **Outputs** in `./data/`:
+
 * `companies.jsonl` – one JSON per company
 * `people.jsonl` – one JSON per employee
 
 🛠️  **Dry‑run:** `C4AI_DEMO_DEBUG=1 python c4ai_discover.py full --query coffee` uses bundled HTML snippets, no network.
 
 ### Handy geoUrn cheatsheet
+
 | Location | geoUrn |
 |----------|--------|
 | Singapore | **103644278** |
@@ -59,7 +65,8 @@ python c4ai_discover.py full \
 | United States | **103644922** |
 | United Kingdom | **102221843** |
 | Australia | **101452733** |
-_See more: <https://www.linkedin.com/search/results/companies/?geoUrn=XXX> – the number after `geoUrn=` is what you need._
+
+See more: <https://www.linkedin.com/search/results/companies/?geoUrn=XXX> – the number after `geoUrn=` is what you need.
 
 ---
 
@@ -77,12 +84,15 @@ python c4ai_insights.py \
   --llm-temperature 1.0 \
   --workers 4
 ```
+
 Emits next to the Stage‑1 files:
+
 * `company_graph.json` – inter‑company similarity graph
 * `org_chart_<handle>.json` – one per company
 * `decision_makers.csv` – hand‑picked ‘who to pitch’ list
 
 Flags reference (straight from `build_arg_parser()`):
+
 | Flag | Default | Purpose |
 |------|---------|---------|
 | `--in` | `.` | Stage‑1 output dir |
@@ -100,9 +110,11 @@ Flags reference (straight from `build_arg_parser()`):
 ## 4  Visualise – interactive graph
 
 After Stage 2 completes, simply open the HTML viewer from the project root:
+
 ```bash
 open graph_view_template.html   # or Live Server / Python -http
 ```
+
 The page fetches `data/company_graph.json` and the `org_chart_*.json` files automatically; keep the `data/` folder beside the HTML file.
 
 * Left pane → list of companies (clans).
@@ -122,6 +134,6 @@ The page fetches `data/company_graph.json` and the `org_chart_*.json` files auto
 ---
 
 ### TL;DR
+
 `crwl profiles` → `c4ai_discover.py` → `c4ai_insights.py` → open `graph_view_template.html`.  
 Live long and `import crawl4ai`.
-

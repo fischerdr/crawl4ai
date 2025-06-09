@@ -1,4 +1,4 @@
-# Proxy 
+# Proxy
 
 ## Basic Proxy Setup
 
@@ -38,7 +38,7 @@ async with AsyncWebCrawler(config=browser_config) as crawler:
 
 Here's the corrected documentation:
 
-## Rotating Proxies 
+## Rotating Proxies
 
 Example using a proxy rotation service dynamically:
 
@@ -65,4 +65,3 @@ if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
 ```
-

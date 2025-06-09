@@ -9,6 +9,7 @@ In this tutorial, you’ll learn:
 3. The difference between raw markdown (`result.markdown`) and filtered markdown (`fit_markdown`)  
 
 > **Prerequisites**  
+>
 > - You’ve completed or read [AsyncWebCrawler Basics](../core/simple-crawling.md) to understand how to run a simple crawl.  
 > - You know how to configure `CrawlerRunConfig`.
 
@@ -41,6 +42,7 @@ if __name__ == "__main__":
 ```
 
 **What’s happening?**  
+
 - `CrawlerRunConfig( markdown_generator = DefaultMarkdownGenerator() )` instructs Crawl4AI to convert the final HTML into markdown at the end of each crawl.  
 - The resulting markdown is accessible via `result.markdown`.
 
@@ -220,11 +222,12 @@ prune_filter = PruningContentFilter(
 
 - **`threshold`**: Score boundary. Blocks below this score get removed.  
 - **`threshold_type`**:  
-    - `"fixed"`: Straight comparison (`score >= threshold` keeps the block).  
-    - `"dynamic"`: The filter adjusts threshold in a data-driven manner.  
+  - `"fixed"`: Straight comparison (`score >= threshold` keeps the block).  
+  - `"dynamic"`: The filter adjusts threshold in a data-driven manner.  
 - **`min_word_threshold`**: Discard blocks under N words as likely too short or unhelpful.
 
 **When to Use PruningContentFilter**  
+
 - You want a broad cleanup without a user query.  
 - The page has lots of repeated sidebars, footers, or disclaimers that hamper text extraction.
 
@@ -266,6 +269,7 @@ async def main():
 ```
 
 **Key Features:**
+
 - **Intelligent Filtering**: Uses LLMs to understand and extract relevant content while maintaining context
 - **Customizable Instructions**: Tailor the filtering process with specific instructions
 - **Chunk Processing**: Handles large documents by processing them in chunks (controlled by `chunk_token_threshold`)
@@ -274,32 +278,34 @@ async def main():
 **Two Common Use Cases:**
 
 1. **Exact Content Preservation**:
-```python
-filter = LLMContentFilter(
-    instruction="""
-    Extract the main educational content while preserving its original wording and substance completely.
-    1. Maintain the exact language and terminology
-    2. Keep all technical explanations and examples intact
-    3. Preserve the original flow and structure
-    4. Remove only clearly irrelevant elements like navigation menus and ads
-    """,
-    chunk_token_threshold=4096
-)
-```
+
+    ```python
+    filter = LLMContentFilter(
+        instruction="""
+        Extract the main educational content while preserving its original wording and substance completely.
+        1. Maintain the exact language and terminology
+        2. Keep all technical explanations and examples intact
+        3. Preserve the original flow and structure
+        4. Remove only clearly irrelevant elements like navigation menus and ads
+        """,
+        chunk_token_threshold=4096
+    )
+    ```
 
 2. **Focused Content Extraction**:
-```python
-filter = LLMContentFilter(
-    instruction="""
-    Focus on extracting specific types of content:
-    - Technical documentation
-    - Code examples
-    - API references
-    Reformat the content into clear, well-structured markdown
-    """,
-    chunk_token_threshold=4096
-)
-```
+
+    ```python
+    filter = LLMContentFilter(
+        instruction="""
+        Focus on extracting specific types of content:
+        - Technical documentation
+        - Code examples
+        - API references
+        Reformat the content into clear, well-structured markdown
+        """,
+        chunk_token_threshold=4096
+    )
+    ```
 
 > **Performance Tip**: Set a smaller `chunk_token_threshold` (e.g., 2048 or 4096) to enable parallel processing of content chunks. The default value is infinity, which processes the entire content as a single chunk.
 
@@ -363,6 +369,7 @@ print("FIT:\n", md_obj.fit_markdown)
 ```
 
 **Why Does This Matter?**  
+
 - You can supply `raw_markdown` to an LLM if you want the entire text.  
 - Or feed `fit_markdown` into a vector database to reduce token usage.  
 - `references_markdown` can help you keep track of link provenance.
@@ -468,20 +475,24 @@ If your codebase or pipeline design allows applying multiple filters in one pass
 ## 9. Common Pitfalls & Tips
 
 1. **No Markdown Output?**  
-   - Make sure the crawler actually retrieved HTML. If the site is heavily JS-based, you may need to enable dynamic rendering or wait for elements.  
-   - Check if your content filter is too aggressive. Lower thresholds or disable the filter to see if content reappears.
+
+- Make sure the crawler actually retrieved HTML. If the site is heavily JS-based, you may need to enable dynamic rendering or wait for elements.  
+- Check if your content filter is too aggressive. Lower thresholds or disable the filter to see if content reappears.
 
 2. **Performance Considerations**  
-   - Very large pages with multiple filters can be slower. Consider `cache_mode` to avoid re-downloading.  
-   - If your final use case is LLM ingestion, consider summarizing further or chunking big texts.
+
+- Very large pages with multiple filters can be slower. Consider `cache_mode` to avoid re-downloading.  
+- If your final use case is LLM ingestion, consider summarizing further or chunking big texts.
 
 3. **Take Advantage of `fit_markdown`**  
-   - Great for RAG pipelines, semantic search, or any scenario where extraneous boilerplate is unwanted.  
-   - Still verify the textual quality—some sites have crucial data in footers or sidebars.
+
+- Great for RAG pipelines, semantic search, or any scenario where extraneous boilerplate is unwanted.  
+- Still verify the textual quality—some sites have crucial data in footers or sidebars.
 
 4. **Adjusting `html2text` Options**  
-   - If you see lots of raw HTML slipping into the text, turn on `escape_html`.  
-   - If code blocks look messy, experiment with `mark_code` or `handle_code_in_pre`.
+
+- If you see lots of raw HTML slipping into the text, turn on `escape_html`.  
+- If code blocks look messy, experiment with `mark_code` or `handle_code_in_pre`.
 
 ---
 

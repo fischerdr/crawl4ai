@@ -1,41 +1,14 @@
-# Link & Media 
+# Link & Media
 
 In this tutorial, you’ll learn how to:
 
 1. Extract links (internal, external) from crawled pages  
 2. Filter or exclude specific domains (e.g., social media or custom domains)  
-3. Access and ma### 3.2 Excluding Images
-
-#### Excluding External Images
-
-If you're dealing with heavy pages or want to skip third-party images (advertisements, for example), you can turn on:
-
-```python
-crawler_cfg = CrawlerRunConfig(
-    exclude_external_images=True
-)
-```
-
-This setting attempts to discard images from outside the primary domain, keeping only those from the site you're crawling.
-
-#### Excluding All Images
-
-If you want to completely remove all images from the page to maximize performance and reduce memory usage, use:
-
-```python
-crawler_cfg = CrawlerRunConfig(
-    exclude_all_images=True
-)
-```
-
-This setting removes all images very early in the processing pipeline, which significantly improves memory efficiency and processing speed. This is particularly useful when:
-- You don't need image data in your results
-- You're crawling image-heavy pages that cause memory issues
-- You want to focus only on text content
-- You need to maximize crawling speeddata (especially images) in the crawl result  
+3. Access and manage media data (especially images) in the crawl result  
 4. Configure your crawler to exclude or prioritize certain images
 
 > **Prerequisites**  
+>
 > - You have completed or are familiar with the [AsyncWebCrawler Basics](../core/simple-crawling.md) tutorial.  
 > - You can run Crawl4AI in your environment (Playwright, Python, etc.).
 
@@ -237,15 +210,36 @@ Depending on your Crawl4AI version or scraping strategy, these dictionaries can 
 
 With these details, you can easily filter out or focus on certain images (for instance, ignoring images with very low scores or a different domain), or gather metadata for analytics.
 
-### 3.2 Excluding External Images
+### 3.2 Excluding Images
 
-If you’re dealing with heavy pages or want to skip third-party images (advertisements, for example), you can turn on:
+#### Excluding External Images
+
+If you're dealing with heavy pages or want to skip third-party images (advertisements, for example), you can turn on:
 
 ```python
 crawler_cfg = CrawlerRunConfig(
     exclude_external_images=True
 )
 ```
+
+This setting attempts to discard images from outside the primary domain, keeping only those from the site you're crawling.
+
+#### Excluding All Images
+
+If you want to completely remove all images from the page to maximize performance and reduce memory usage, use:
+
+```python
+crawler_cfg = CrawlerRunConfig(
+    exclude_all_images=True
+)
+```
+
+This setting removes all images very early in the processing pipeline, which significantly improves memory efficiency and processing speed. This is particularly useful when:
+
+- You don't need image data in your results
+- You're crawling image-heavy pages that cause memory issues
+- You want to focus only on text content
+- You need to maximize crawling speeddata (especially images) in the crawl result  
 
 This setting attempts to discard images from outside the primary domain, keeping only those from the site you’re crawling.
 
@@ -290,6 +284,7 @@ crawler_cfg = CrawlerRunConfig(
 ```
 
 Each extracted table contains:
+
 - `headers`: Column header names
 - `rows`: List of rows, each containing cell values
 - `caption`: Table caption text (if available)
@@ -329,6 +324,7 @@ if __name__ == "__main__":
 ```
 
 The MHTML format is particularly useful because:
+
 - It captures the complete page state including all resources
 - It can be opened in most modern browsers for offline viewing
 - It preserves the page exactly as it appeared during crawling
@@ -387,22 +383,27 @@ if __name__ == "__main__":
 ## 5. Common Pitfalls & Tips
 
 1. **Conflicting Flags**:  
-   - `exclude_external_links=True` but then also specifying `exclude_social_media_links=True` is typically fine, but understand that the first setting already discards *all* external links. The second becomes somewhat redundant.  
-   - `exclude_external_images=True` but want to keep some external images? Currently no partial domain-based setting for images, so you might need a custom approach or hook logic.
+
+- `exclude_external_links=True` but then also specifying `exclude_social_media_links=True` is typically fine, but understand that the first setting already discards *all* external links. The second becomes somewhat redundant.  
+- `exclude_external_images=True` but want to keep some external images? Currently no partial domain-based setting for images, so you might need a custom approach or hook logic.
 
 2. **Relevancy Scores**:  
-   - If your version of Crawl4AI or your scraping strategy includes an `img["score"]`, it’s typically a heuristic based on size, position, or content analysis. Evaluate carefully if you rely on it.
+
+- If your version of Crawl4AI or your scraping strategy includes an `img["score"]`, it’s typically a heuristic based on size, position, or content analysis. Evaluate carefully if you rely on it.
 
 3. **Performance**:  
-   - Excluding certain domains or external images can speed up your crawl, especially for large, media-heavy pages.  
-   - If you want a “full” link map, do *not* exclude them. Instead, you can post-filter in your own code.
+
+- Excluding certain domains or external images can speed up your crawl, especially for large, media-heavy pages.  
+- If you want a “full” link map, do *not* exclude them. Instead, you can post-filter in your own code.
 
 4. **Social Media Lists**:  
-   - `exclude_social_media_links=True` typically references an internal list of known social domains like Facebook, Twitter, LinkedIn, etc. If you need to add or remove from that list, look for library settings or a local config file (depending on your version).
+
+- `exclude_social_media_links=True` typically references an internal list of known social domains like Facebook, Twitter, LinkedIn, etc. If you need to add or remove from that list, look for library settings or a local config file (depending on your version).
 
 ---
 
 **That’s it for Link & Media Analysis!** You’re now equipped to filter out unwanted sites and zero in on the images and videos that matter for your project.
+
 ### Table Extraction Tips
 
 - Not all HTML tables are extracted - only those detected as "data tables" vs. layout tables.

@@ -14,14 +14,13 @@ Crawl4AI’s **hooks** let you customize the crawler at specific points in the p
 **Important**: Avoid heavy tasks in `on_browser_created` since you don’t yet have a page context. If you need to *log in*, do so in **`on_page_context_created`**.
 
 > note "Important Hook Usage Warning"
-    **Avoid Misusing Hooks**: Do not manipulate page objects in the wrong hook or at the wrong time, as it can crash the pipeline or produce incorrect results. A common mistake is attempting to handle authentication prematurely—such as creating or closing pages in `on_browser_created`. 
-
->   **Use the Right Hook for Auth**: If you need to log in or set tokens, use `on_page_context_created`. This ensures you have a valid page/context to work with, without disrupting the main crawling flow.
-
->    **Identity-Based Crawling**: For robust auth, consider identity-based crawling (or passing a session ID) to preserve state. Run your initial login steps in a separate, well-defined process, then feed that session to your main crawl—rather than shoehorning complex authentication into early hooks. Check out [Identity-Based Crawling](../advanced/identity-based-crawling.md) for more details.
-
->    **Be Cautious**: Overwriting or removing elements in the wrong hook can compromise the final crawl. Keep hooks focused on smaller tasks (like route filters, custom headers), and let your main logic (crawling, data extraction) proceed normally.
-
+    **Avoid Misusing Hooks**: Do not manipulate page objects in the wrong hook or at the wrong time, as it can crash the pipeline or produce incorrect results. A common mistake is attempting to handle authentication prematurely—such as creating or closing pages in `on_browser_created`.
+>
+> **Use the Right Hook for Auth**: If you need to log in or set tokens, use `on_page_context_created`. This ensures you have a valid page/context to work with, without disrupting the main crawling flow.
+>
+> **Identity-Based Crawling**: For robust auth, consider identity-based crawling (or passing a session ID) to preserve state. Run your initial login steps in a separate, well-defined process, then feed that session to your main crawl—rather than shoehorning complex authentication into early hooks. Check out [Identity-Based Crawling](../advanced/identity-based-crawling.md) for more details.
+>
+> **Be Cautious**: Overwriting or removing elements in the wrong hook can compromise the final crawl. Keep hooks focused on smaller tasks (like route filters, custom headers), and let your main logic (crawling, data extraction) proceed normally.
 
 Below is an example demonstration.
 
@@ -190,30 +189,38 @@ if __name__ == "__main__":
 ## Hook Lifecycle Summary
 
 1. **`on_browser_created`**:  
-   - Browser is up, but **no** pages or contexts yet.  
-   - Light setup only—don’t try to open or close pages here (that belongs in `on_page_context_created`).
+
+- Browser is up, but **no** pages or contexts yet.  
+- Light setup only—don’t try to open or close pages here (that belongs in `on_page_context_created`).
 
 2. **`on_page_context_created`**:  
-   - Perfect for advanced **auth** or route blocking.  
-   - You have a **page** + **context** ready but haven’t navigated to the target URL yet.
+
+- Perfect for advanced **auth** or route blocking.  
+- You have a **page** + **context** ready but haven’t navigated to the target URL yet.
 
 3. **`before_goto`**:  
-   - Right before navigation. Typically used for setting **custom headers** or logging the target URL.
+
+- Right before navigation. Typically used for setting **custom headers** or logging the target URL.
 
 4. **`after_goto`**:  
-   - After page navigation is done. Good place for verifying content or waiting on essential elements. 
+
+- After page navigation is done. Good place for verifying content or waiting on essential elements.
 
 5. **`on_user_agent_updated`**:  
-   - Whenever the user agent changes (for stealth or different UA modes).
+
+- Whenever the user agent changes (for stealth or different UA modes).
 
 6. **`on_execution_started`**:  
-   - If you set `js_code` or run custom scripts, this runs once your JS is about to start.
+
+- If you set `js_code` or run custom scripts, this runs once your JS is about to start.
 
 7. **`before_retrieve_html`**:  
-   - Just before the final HTML snapshot is taken. Often you do a final scroll or lazy-load triggers here.
+
+- Just before the final HTML snapshot is taken. Often you do a final scroll or lazy-load triggers here.
 
 8. **`before_return_html`**:  
-   - The last hook before returning HTML to the `CrawlResult`. Good for logging HTML length or minor modifications.
+
+- The last hook before returning HTML to the `CrawlResult`. Good for logging HTML length or minor modifications.
 
 ---
 
@@ -248,7 +255,7 @@ Hooks provide **fine-grained** control over:
 - **Final HTML** retrieval
 
 Follow the recommended usage:
+
 - **Login** or advanced tasks in `on_page_context_created`  
 - **Custom headers** or logs in `before_goto` / `after_goto`  
 - **Scrolling** or final checks in `before_retrieve_html` / `before_return_html`
-

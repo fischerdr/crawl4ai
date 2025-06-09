@@ -167,6 +167,7 @@ if __name__ == "__main__":
 ```
 
 Here:
+
 - `url="raw://..."` passes the HTML content directly, no network requests.  
 - The **CSS** extraction strategy populates `result.extracted_content` with the JSON array `[{"title": "...", "link": "..."}]`.
 
@@ -243,7 +244,6 @@ else:
 
 **Deprecation**: Since v0.5 `result.markdown_v2`, `result.fit_html`,`result.fit_markdown` are deprecated. Use `result.markdown` instead! It holds `MarkdownGenerationResult`, which includes `fit_html` and `fit_markdown`
 as it's properties.
-
 
 ---
 

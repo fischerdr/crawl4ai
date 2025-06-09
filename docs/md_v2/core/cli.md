@@ -1,6 +1,7 @@
 # Crawl4AI CLI Guide
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Configuration](#configuration)
@@ -11,11 +12,18 @@
 - [Advanced Features](#advanced-features)
   - [LLM Q&A](#llm-qa)
   - [Structured Data Extraction](#structured-data-extraction)
-  - [Content Filtering](#content-filtering-1)
+  - [Content Filtering](#content-filtering)
 - [Output Formats](#output-formats)
-- [Examples](#examples)
-- [Configuration Reference](#configuration-reference)
+- [Examples](#complete-examples)
 - [Best Practices & Tips](#best-practices--tips)
+
+## Installation
+
+This installs the **core** Crawl4AI library along with essential dependencies. **No** advanced features (like transformers or PyTorch) are included yet.
+
+```bash
+pip install crawl4ai
+```
 
 ## Basic Usage
 
@@ -98,63 +106,65 @@ crwl https://example.com -c "css_selector=#main,delay_before_return_html=2,scan_
 Two types of extraction are supported:
 
 1. CSS/XPath-based extraction:
-```yaml
-# extract_css.yml
-type: "json-css"
-params:
-  verbose: true
-```
 
-```json
-// css_schema.json
-{
-  "name": "ArticleExtractor",
-  "baseSelector": ".article",
-  "fields": [
+    ```yaml
+    # extract_css.yml
+    type: "json-css"
+    params:
+      verbose: true
+    ```
+
+    ```json
+    // css_schema.json
     {
-      "name": "title",
-      "selector": "h1.title",
-      "type": "text"
-    },
-    {
-      "name": "link",
-      "selector": "a.read-more",
-      "type": "attribute",
-      "attribute": "href"
+      "name": "ArticleExtractor",
+      "baseSelector": ".article",
+      "fields": [
+        {
+          "name": "title",
+          "selector": "h1.title",
+          "type": "text"
+        },
+        {
+          "name": "link",
+          "selector": "a.read-more",
+          "type": "attribute",
+          "attribute": "href"
+        }
+      ]
     }
-  ]
-}
-```
+    ```
 
 2. LLM-based extraction:
-```yaml
-# extract_llm.yml
-type: "llm"
-provider: "openai/gpt-4"
-instruction: "Extract all articles with their titles and links"
-api_token: "your-token"
-params:
-  temperature: 0.3
-  max_tokens: 1000
-```
 
-```json
-// llm_schema.json
-{
-  "title": "Article",
-  "type": "object",
-  "properties": {
-    "title": {
-      "type": "string",
-      "description": "The title of the article"
-    },
-    "link": {
-      "type": "string",
-      "description": "URL to the full article"
+    ```yaml
+    # extract_llm.yml
+    type: "llm"
+    provider: "openai/gpt-4"
+    instruction: "Extract all articles with their titles and links"
+    api_token: "your-token"
+    params:
+      temperature: 0.3
+      max_tokens: 1000
+    ```
+
+    ```json
+    // llm_schema.json
+    {
+      "title": "Article",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the article"
+        },
+        "link": {
+          "type": "string",
+          "description": "URL to the full article"
+        }
+      }
     }
-  }
-}
-```
+    ```
 
 ## Advanced Features
 
@@ -179,6 +189,7 @@ crwl https://example.com \
 ```
 
 First-time setup:
+
 - Prompts for LLM provider and API token
 - Saves configuration in `~/.crawl4ai/global.yml`
 - Supports various providers (openai/gpt-4, anthropic/claude-3-sonnet, etc.)
@@ -235,41 +246,45 @@ crwl https://example.com -f filter_bm25.yml -o markdown-fit
 ## Complete Examples
 
 1. Basic Extraction:
-```bash
-crwl https://example.com \
-    -B browser.yml \
-    -C crawler.yml \
-    -o json
-```
+
+    ```bash
+    crwl https://example.com \
+        -B browser.yml \
+        -C crawler.yml \
+        -o json
+    ```
 
 2. Structured Data Extraction:
-```bash
-crwl https://example.com \
-    -e extract_css.yml \
-    -s css_schema.json \
-    -o json \
-    -v
-```
+
+    ```bash
+    crwl https://example.com \
+        -e extract_css.yml \
+        -s css_schema.json \
+        -o json \
+        -v
+    ```
 
 3. LLM Extraction with Filtering:
-```bash
-crwl https://example.com \
-    -B browser.yml \
-    -e extract_llm.yml \
-    -s llm_schema.json \
-    -f filter_bm25.yml \
-    -o json
-```
+
+    ```bash
+    crwl https://example.com \
+        -B browser.yml \
+        -e extract_llm.yml \
+        -s llm_schema.json \
+        -f filter_bm25.yml \
+        -o json
+    ```
 
 4. Interactive Q&A:
-```bash
-# First crawl and view
-crwl https://example.com -o markdown
 
-# Then ask questions
-crwl https://example.com -q "What are the main points?"
-crwl https://example.com -q "Summarize the conclusions"
-```
+    ```bash
+    # First crawl and view
+    crwl https://example.com -o markdown
+
+    # Then ask questions
+    crwl https://example.com -q "What are the main points?"
+    crwl https://example.com -q "Summarize the conclusions"
+    ```
 
 ## Best Practices & Tips
 
@@ -296,9 +311,9 @@ crwl https://example.com -q "Summarize the conclusions"
 ## Recap
 
 The Crawl4AI CLI provides:
+
 - Flexible configuration via files and parameters
 - Multiple extraction strategies (CSS, XPath, LLM)
 - Content filtering and optimization
 - Interactive Q&A capabilities
 - Various output formats
-

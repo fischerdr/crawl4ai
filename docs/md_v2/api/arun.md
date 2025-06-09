@@ -38,6 +38,7 @@ async def main():
 ```
 
 **Key Fields**:
+
 - `verbose=True` logs each crawl step.  
 - `cache_mode` decides how to read/write the local crawl cache.
 
@@ -159,6 +160,7 @@ run_config = CrawlerRunConfig(
     override_navigator=True
 )
 ```
+
 - `magic=True` tries multiple stealth features.  
 - `simulate_user=True` mimics mouse movements or random delays.  
 - `override_navigator=True` fakes some navigator properties (like user agent checks).
@@ -167,12 +169,14 @@ run_config = CrawlerRunConfig(
 
 ## 5. Session Management
 
-**`session_id`**: 
+**`session_id`**:
+
 ```python
 run_config = CrawlerRunConfig(
     session_id="my_session123"
 )
 ```
+
 If re-used in subsequent `arun()` calls, the same tab/page context is continued (helpful for multi-step tasks or stateful browsing).
 
 ---
@@ -188,7 +192,9 @@ run_config = CrawlerRunConfig(
     image_score_threshold=3,                # Filter out low-score images
 )
 ```
+
 **Where they appear**:
+
 - `result.screenshot` → Base64 screenshot string.
 - `result.pdf` → Byte array with PDF data.
 
@@ -304,6 +310,6 @@ All parameters that used to be direct arguments to `arun()` now belong in **`Cra
 - Minimizes confusion about which arguments affect global vs. per-crawl behavior.  
 - Allows you to create **reusable** config objects for different pages or tasks.
 
-For a **full** reference, check out the [CrawlerRunConfig Docs](./parameters.md). 
+For a **full** reference, check out the [CrawlerRunConfig Docs](./parameters.md).
 
 Happy crawling with your **structured, flexible** config approach!

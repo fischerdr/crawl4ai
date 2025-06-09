@@ -1,6 +1,7 @@
 # Crawl4AI Docker Guide 🐳
 
 ## Table of Contents
+
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
   - [Option 1: Using Pre-built Docker Hub Images (Recommended)](#option-1-using-pre-built-docker-hub-images-recommended)
@@ -10,14 +11,12 @@
 - [Using the API](#using-the-api)
   - [Playground Interface](#playground-interface)
   - [Python SDK](#python-sdk)
-  - [Understanding Request Schema](#understanding-request-schema)
   - [REST API Examples](#rest-api-examples)
 - [Additional API Endpoints](#additional-api-endpoints)
   - [HTML Extraction Endpoint](#html-extraction-endpoint)
   - [Screenshot Endpoint](#screenshot-endpoint)
   - [PDF Export Endpoint](#pdf-export-endpoint)
   - [JavaScript Execution Endpoint](#javascript-execution-endpoint)
-  - [Library Context Endpoint](#library-context-endpoint)
 - [MCP (Model Context Protocol) Support](#mcp-model-context-protocol-support)
   - [What is MCP?](#what-is-mcp)
   - [Connecting via MCP](#connecting-via-mcp)
@@ -26,12 +25,8 @@
   - [Testing MCP Connections](#testing-mcp-connections)
   - [MCP Schemas](#mcp-schemas)
 - [Metrics & Monitoring](#metrics--monitoring)
-- [Deployment Scenarios](#deployment-scenarios)
-- [Complete Examples](#complete-examples)
 - [Server Configuration](#server-configuration)
   - [Understanding config.yml](#understanding-configyml)
-  - [JWT Authentication](#jwt-authentication)
-  - [Configuration Tips and Best Practices](#configuration-tips-and-best-practices)
   - [Customizing Your Configuration](#customizing-your-configuration)
   - [Configuration Recommendations](#configuration-recommendations)
 - [Getting Help](#getting-help)
@@ -40,6 +35,7 @@
 ## Prerequisites
 
 Before we dive in, make sure you have:
+
 - Docker installed and running (version 20.10.0 or higher), including `docker compose` (usually bundled with Docker Desktop).
 - `git` for cloning the repository.
 - At least 4GB of RAM available for the container (more recommended for heavy use).
@@ -89,11 +85,13 @@ ANTHROPIC_API_KEY=your-anthropic-key
 # GEMINI_API_TOKEN=your-gemini-token
 EOL
 ```
+
 > 🔑 **Note**: Keep your API keys secure! Never commit `.llm.env` to version control.
 
 #### 3. Run the Container
 
-*   **Basic run:**
+- **Basic run:**
+
     ```bash
     docker run -d \
       -p 11235:11235 \
@@ -102,7 +100,8 @@ EOL
       unclecode/crawl4ai:latest
     ```
 
-*   **With LLM support:**
+- **With LLM support:**
+
     ```bash
     # Make sure .llm.env is in the current directory
     docker run -d \
@@ -123,12 +122,12 @@ docker stop crawl4ai && docker rm crawl4ai
 
 #### Docker Hub Versioning Explained
 
-*   **Image Name:** `unclecode/crawl4ai`
-*   **Tag Format:** `LIBRARY_VERSION[-SUFFIX]` (e.g., `0.6.0-r2`)
-    *   `LIBRARY_VERSION`: The semantic version of the core `crawl4ai` Python library
-    *   `SUFFIX`: Optional tag for release candidates (``) and revisions (`r1`)
-*   **`latest` Tag:** Points to the most recent stable version
-*   **Multi-Architecture Support:** All images support both `linux/amd64` and `linux/arm64` architectures through a single tag
+- **Image Name:** `unclecode/crawl4ai`
+- **Tag Format:** `LIBRARY_VERSION[-SUFFIX]` (e.g., `0.6.0-r2`)
+  - `LIBRARY_VERSION`: The semantic version of the core `crawl4ai` Python library
+  - `SUFFIX`: Optional tag for release candidates (``) and revisions (`r1`)
+- **`latest` Tag:** Points to the most recent stable version
+- **Multi-Architecture Support:** All images support both `linux/amd64` and `linux/arm64` architectures through a single tag
 
 ### Option 2: Using Docker Compose
 
@@ -156,21 +155,24 @@ cp deploy/docker/.llm.env.example .llm.env
 
 The `docker-compose.yml` file in the project root provides a simplified approach that automatically handles architecture detection using buildx.
 
-*   **Run Pre-built Image from Docker Hub:**
+- **Run Pre-built Image from Docker Hub:**
+
     ```bash
     # Pulls and runs the release candidate from Docker Hub
     # Automatically selects the correct architecture
     IMAGE=unclecode/crawl4ai:latest docker compose up -d
     ```
 
-*   **Build and Run Locally:**
+- **Build and Run Locally:**
+
     ```bash
     # Builds the image locally using Dockerfile and runs it
     # Automatically uses the correct architecture for your machine
     docker compose up --build -d
     ```
 
-*   **Customize the Build:**
+- **Customize the Build:**
+
     ```bash
     # Build with all features (includes torch and transformers)
     INSTALL_TYPE=all docker compose up --build -d
@@ -215,9 +217,10 @@ docker buildx build \
   -t crawl4ai-local:latest --load .
 ```
 
-#### 3. Run the Container
+#### 3. Run the Container (Manual)
 
-*   **Basic run (no LLM support):**
+- **Basic run (no LLM support):**
+
     ```bash
     docker run -d \
       -p 11235:11235 \
@@ -226,7 +229,8 @@ docker buildx build \
       crawl4ai-local:latest
     ```
 
-*   **With LLM support:**
+- **With LLM support:**
+
     ```bash
     # Make sure .llm.env is in the current directory (project root)
     docker run -d \
@@ -239,7 +243,7 @@ docker buildx build \
 
 > The server will be available at `http://localhost:11235`.
 
-#### 4. Stopping the Manual Container
+#### 4. Stopping the Manual Container (Manual)
 
 ```bash
 docker stop crawl4ai-standalone && docker rm crawl4ai-standalone
@@ -309,7 +313,7 @@ In addition to the core `/crawl` and `/crawl/stream` endpoints, the server provi
 
 ### HTML Extraction Endpoint
 
-```
+```html
 POST /html
 ```
 
@@ -323,7 +327,7 @@ Crawls the URL and returns preprocessed HTML optimized for schema extraction.
 
 ### Screenshot Endpoint
 
-```
+```html
 POST /screenshot
 ```
 
@@ -342,7 +346,7 @@ Captures a full-page PNG screenshot of the specified URL.
 
 ### PDF Export Endpoint
 
-```
+```html
 POST /pdf
 ```
 
@@ -359,7 +363,7 @@ Generates a PDF document of the specified URL.
 
 ### JavaScript Execution Endpoint
 
-```
+```html
 POST /execute_js
 ```
 
@@ -408,14 +412,14 @@ docker buildx build \
 
 ### Build Best Practices
 
-1.  **Choose the Right Install Type**
-    *   `default`: Basic installation, smallest image size. Suitable for most standard web scraping and markdown generation.
-    *   `all`: Full features including `torch` and `transformers` for advanced extraction strategies (e.g., CosineStrategy, certain LLM filters). Significantly larger image. Ensure you need these extras.
-2.  **Platform Considerations**
-    *   Use `buildx` for building multi-architecture images, especially for pushing to registries.
-    *   Use `docker compose` profiles (`local-amd64`, `local-arm64`) for easy platform-specific local builds.
-3.  **Performance Optimization**
-    *   The image automatically includes platform-specific optimizations (OpenMP for AMD64, OpenBLAS for ARM64).
+1. **Choose the Right Install Type**
+    - `default`: Basic installation, smallest image size. Suitable for most standard web scraping and markdown generation.
+    - `all`: Full features including `torch` and `transformers` for advanced extraction strategies (e.g., CosineStrategy, certain LLM filters). Significantly larger image. Ensure you need these extras.
+2. **Platform Considerations**
+    - Use `buildx` for building multi-architecture images, especially for pushing to registries.
+    - Use `docker compose` profiles (`local-amd64`, `local-arm64`) for easy platform-specific local builds.
+3. **Performance Optimization**
+    - The image automatically includes platform-specific optimizations (OpenMP for AMD64, OpenBLAS for ARM64).
 
 ---
 
@@ -487,20 +491,21 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-*(SDK parameters like timeout, verify_ssl etc. remain the same)*
+>SDK parameters like timeout, verify_ssl etc. remain the same
 
 ### Second Approach: Direct API Calls
 
 Crucially, when sending configurations directly via JSON, they **must** follow the `{"type": "ClassName", "params": {...}}` structure for any non-primitive value (like config objects or strategies). Dictionaries must be wrapped as `{"type": "dict", "value": {...}}`.
 
-*(Keep the detailed explanation of Configuration Structure, Basic Pattern, Simple vs Complex, Strategy Pattern, Complex Nested Example, Quick Grammar Overview, Important Rules, Pro Tip)*
+(Keep the detailed explanation of Configuration Structure, Basic Pattern, Simple vs Complex, Strategy Pattern, Complex Nested Example, Quick Grammar Overview, Important Rules, Pro Tip)
 
 #### More Examples *(Ensure Schema example uses type/value wrapper)*
 
 **Advanced Crawler Configuration**
 *(Keep example, ensure cache_mode uses valid enum value like "bypass")*
 
-**Extraction Strategy**
+#### Extraction Strategy
+
 ```json
 {
     "crawler_config": {
@@ -634,13 +639,14 @@ Keep an eye on your crawler with these endpoints:
 - `/schema` - Full API schema
 
 Example health check:
+
 ```bash
 curl http://localhost:11235/health
 ```
 
 ---
 
-*(Deployment Scenarios and Complete Examples sections remain the same, maybe update links if examples moved)*
+> **(Deployment Scenarios and Complete Examples sections remain the same, maybe update links if examples moved)**
 
 ---
 
@@ -720,9 +726,8 @@ observability:
     endpoint: "/health"
 ```
 
-*(JWT Authentication section remains the same, just note the default port is now 11235 for requests)*
-
-*(Configuration Tips and Best Practices remain the same)*
+>JWT Authentication section remains the same, just note the default port is now 11235 for requests
+>Configuration Tips and Best Practices remain the same
 
 ### Customizing Your Configuration
 
@@ -730,15 +735,16 @@ You can override the default `config.yml`.
 
 #### Method 1: Modify Before Build
 
-1.  Edit the `deploy/docker/config.yml` file in your local repository clone.
-2.  Build the image using `docker buildx` or `docker compose --profile local-... up --build`. The modified file will be copied into the image.
+1. Edit the `deploy/docker/config.yml` file in your local repository clone.
+2. Build the image using `docker buildx` or `docker compose --profile local-... up --build`. The modified file will be copied into the image.
 
 #### Method 2: Runtime Mount (Recommended for Custom Deploys)
 
-1.  Create your custom configuration file, e.g., `my-custom-config.yml` locally. Ensure it contains all necessary sections.
-2.  Mount it when running the container:
+1. Create your custom configuration file, e.g., `my-custom-config.yml` locally. Ensure it contains all necessary sections.
+2. Mount it when running the container:
 
-    *   **Using `docker run`:**
+    - **Using `docker run`:**
+
         ```bash
         # Assumes my-custom-config.yml is in the current directory
         docker run -d -p 11235:11235 \
@@ -749,7 +755,8 @@ You can override the default `config.yml`.
           unclecode/crawl4ai:latest # Or your specific tag
         ```
 
-    *   **Using `docker-compose.yml`:** Add a `volumes` section to the service definition:
+    - **Using `docker-compose.yml`:** Add a `volumes` section to the service definition:
+
         ```yaml
         services:
           crawl4ai-hub-amd64: # Or your chosen service
@@ -762,6 +769,7 @@ You can override the default `config.yml`.
               # Keep the shared memory volume from base-config
               - /dev/shm:/dev/shm
         ```
+
         *(Note: Ensure `my-custom-config.yml` is in the same directory as `docker-compose.yml`)*
 
 > 💡 When mounting, your custom file *completely replaces* the default one. Ensure it's a valid and complete configuration.
@@ -801,6 +809,7 @@ We're here to help you succeed with Crawl4AI! Here's how to get support:
 ## Summary
 
 In this guide, we've covered everything you need to get started with Crawl4AI's Docker deployment:
+
 - Building and running the Docker container
 - Configuring the environment  
 - Using the interactive playground for testing

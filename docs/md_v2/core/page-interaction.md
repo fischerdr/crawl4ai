@@ -55,6 +55,7 @@ if __name__ == "__main__":
 ```
 
 **Relevant `CrawlerRunConfig` params**:
+
 - **`js_code`**: A string or list of strings with JavaScript to run after the page loads.
 - **`js_only`**: If set to `True` on subsequent calls, indicates we’re continuing an existing session without a new full navigation.  
 - **`session_id`**: If you want to keep the same page across multiple calls, specify an ID.
@@ -90,6 +91,7 @@ if __name__ == "__main__":
 ```
 
 **Key param**:
+
 - **`wait_for="css:..."`**: Tells the crawler to wait until that CSS selector is present.
 
 ### 2.2 JavaScript-Based Waiting
@@ -161,6 +163,7 @@ if __name__ == "__main__":
 ```
 
 **Key params**:
+
 - **`session_id="hn_session"`**: Keep the same page across multiple calls to `arun()`.
 - **`js_only=True`**: We’re not performing a full reload, just applying JS in the existing page.
 - **`wait_for`** with `js:`: Wait for item count to grow beyond 30.

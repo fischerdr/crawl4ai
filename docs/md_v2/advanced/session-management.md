@@ -9,7 +9,7 @@ Session management in Crawl4AI is a powerful feature that allows you to maintain
 
 ---
 
-#### Basic Session Usage
+## Basic Session Usage
 
 Use `BrowserConfig` and `CrawlerRunConfig` to maintain state with a `session_id`:
 
@@ -39,7 +39,7 @@ async with AsyncWebCrawler() as crawler:
 
 ---
 
-#### Dynamic Content with Sessions
+## Dynamic Content with Sessions
 
 Here's an example of crawling GitHub commits across multiple pages while preserving session state:
 
@@ -125,6 +125,7 @@ asyncio.run(basic_session_crawl())
 ```
 
 This example shows:
+
 1. Reusing the same `session_id` across multiple requests.
 2. Executing JavaScript to load more content dynamically.
 3. Properly closing the session to free resources.
@@ -225,7 +226,7 @@ asyncio.run(integrated_js_and_wait_crawl())
 
 ---
 
-#### Common Use Cases for Sessions
+## Common Use Cases for Sessions
 
 1. **Authentication Flows**: Login and interact with secured pages.
 

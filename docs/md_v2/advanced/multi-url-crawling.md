@@ -113,7 +113,6 @@ rate_limiter = RateLimiter(
 
 The `RateLimiter` integrates seamlessly with dispatchers like `MemoryAdaptiveDispatcher` and `SemaphoreDispatcher`, ensuring requests are paced correctly without user intervention. Its internal mechanisms manage delays and retries to avoid overwhelming servers while maximizing efficiency.
 
-
 ### 2.2 Crawler Monitor
 
 The CrawlerMonitor provides real-time visibility into crawling operations:
@@ -254,6 +253,7 @@ async def crawl_batch():
 ```
 
 **Review:**  
+
 - **Purpose:** Executes a batch crawl with all URLs processed together after crawling is complete.  
 - **Dispatcher:** Uses `MemoryAdaptiveDispatcher` to manage concurrency and system memory.  
 - **Stream:** Disabled (`stream=False`), so all results are collected at once for post-processing.  
@@ -295,6 +295,7 @@ async def crawl_streaming():
 ```
 
 **Review:**  
+
 - **Purpose:** Enables streaming to process results as soon as they’re available.  
 - **Dispatcher:** Uses `MemoryAdaptiveDispatcher` for concurrency and memory management.  
 - **Stream:** Enabled (`stream=True`), allowing real-time processing during crawling.  
@@ -331,6 +332,7 @@ async def crawl_with_semaphore(urls):
 ```
 
 **Review:**  
+
 - **Purpose:** Uses `SemaphoreDispatcher` to limit concurrency with a fixed number of slots.  
 - **Dispatcher:** Configured with a semaphore to control parallel crawling tasks.  
 - **Rate Limiter:** Prevents servers from being overwhelmed by pacing requests.  
@@ -371,6 +373,7 @@ if __name__ == "__main__":
 ```
 
 **Review:**  
+
 - **Purpose:** Ensures compliance with `robots.txt` rules for ethical and legal web crawling.  
 - **Configuration:** Set `check_robots_txt=True` to validate each URL against `robots.txt` before crawling.  
 - **Dispatcher:** Handles requests with concurrency limits (`semaphore_count=3`).  
@@ -408,20 +411,20 @@ for result in results:
 
 1. **Two Dispatcher Types**:
 
-   - MemoryAdaptiveDispatcher (default): Dynamic concurrency based on memory
-   - SemaphoreDispatcher: Fixed concurrency limit
+- MemoryAdaptiveDispatcher (default): Dynamic concurrency based on memory
+- SemaphoreDispatcher: Fixed concurrency limit
 
 2. **Optional Components**:
 
-   - RateLimiter: Smart request pacing and backoff
-   - CrawlerMonitor: Real-time progress visualization
+- RateLimiter: Smart request pacing and backoff
+- CrawlerMonitor: Real-time progress visualization
 
 3. **Key Benefits**:
 
-   - Automatic memory management
-   - Built-in rate limiting
-   - Live progress monitoring
-   - Flexible concurrency control
+- Automatic memory management
+- Built-in rate limiting
+- Live progress monitoring
+- Flexible concurrency control
 
 Choose the dispatcher that best fits your needs:
 
