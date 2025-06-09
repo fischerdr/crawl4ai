@@ -228,9 +228,6 @@ tree.md
 /plans
 plans/
 
-# Cursor
-.cursor/
-
 # Codeium
 .codeiumignore
 todo/
